@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="13px" height="13px" viewBox="0 0 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Dismiss</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons---Master" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="On-bg" sketch:type="MSArtboardGroup" transform="translate(-255.000000, -55.000000)" fill="#999999">
+            <path d="M260.313708,60.3137085 L254.31458,60.3137085 C253.758339,60.3137085 253.313708,60.7614237 253.313708,61.3137085 C253.313708,61.8698437 253.761814,62.3137085 254.31458,62.3137085 L260.313708,62.3137085 L260.313708,68.3128368 C260.313708,68.8690776 260.761424,69.3137085 261.313708,69.3137085 C261.869844,69.3137085 262.313708,68.865603 262.313708,68.3128368 L262.313708,62.3137085 L268.312837,62.3137085 C268.869078,62.3137085 269.313708,61.8659932 269.313708,61.3137085 C269.313708,60.7575733 268.865603,60.3137085 268.312837,60.3137085 L262.313708,60.3137085 L262.313708,54.3145802 C262.313708,53.7583394 261.865993,53.3137085 261.313708,53.3137085 C260.757573,53.3137085 260.313708,53.761814 260.313708,54.3145802 L260.313708,60.3137085 Z" id="Dismiss" sketch:type="MSShapeGroup" transform="translate(261.313708, 61.313708) rotate(-315.000000) translate(-261.313708, -61.313708) "></path>
+        </g>
+    </g>
+</svg>

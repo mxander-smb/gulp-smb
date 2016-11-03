@@ -1,0 +1,7 @@
+# Thumbnail cache files
+Thumbs.db
+
+# Application specific files
+node_modules
+build
+.sass-cache
