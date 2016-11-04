@@ -111,11 +111,18 @@ module.exports = {
     }
   },
 
-  // RequireJS modules
-  // @TODO: Not correctly working yet, check https://github.com/jlouns/gulp-requirejs-optimize/issues/9#issuecomment-161673480
+  // RequireJS
   scripts: {
     src: [
-      srcAssets + '/javascripts/modules/*.js'
+      srcAssets + '/javascripts/*.js',
+      '!' + srcAssets + '/javascripts/requirejs-config.js',
+      // Ignore shell example
+      '!' + srcAssets + '/javascripts/shell-rjs-example.js'
+
+      // Use this config to demo the scripts:shell task, which
+      // uses r.js instead of a wrapper.
+      //srcAssets + '/javascripts/shell-rjs-example.js',
+      //'!' + srcAssets + '/javascripts/requirejs-config.js'
     ],
     dest: developmentAssets + '/js',
     options: {}
