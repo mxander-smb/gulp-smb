@@ -8,6 +8,7 @@ gulp.task('build:production', function(callback) {
     // Use just 'styles', when CSS sourcemaps
     // are needed on production build.
     'styles:production',
+    'styles:less:production',
 
     'scripts',
     'images'
@@ -23,6 +24,11 @@ gulp.task('build:production', function(callback) {
 
   // After optimize:html, so that all files exist
   // for Phantom.JS (UnCSS)
+  //
+  // @NOTE: All unused CSS will be removed while this task,
+  // is active! Disable to get the full CSS from the styles
+  // task, or define in config.js which html files should be
+  // used to lookup usage.
   'optimize:css',
 
   // Revision asset files and update their references

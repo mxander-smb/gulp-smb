@@ -7,6 +7,7 @@ gulp.task('build', function(callback) {
   [
     'copy:html',
     'styles',
+    'styles:less',
     'scripts',
     'sprites',
     'images'

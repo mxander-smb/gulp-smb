@@ -47,10 +47,10 @@ module.exports = {
   },
 
   // Watch source files
-  // @TODO: Right now only scss style files are watched
   watch: {
     html:    src + '/**/*.html',
-    styles:  srcAssets + '/styles/**/*.scss',
+    scss:    srcAssets + '/styles/**/*.scss',
+    less:    srcAssets + '/styles/**/*.less',
     scripts: srcAssets + '/javascripts/**/*.js',
     images:  srcAssets + '/images/**/*',
     svg:     srcAssets + '/images/**/*.svg',
@@ -66,12 +66,16 @@ module.exports = {
 
   // CSS config
   styles: {
-    src:  srcAssets + '/styles/*.scss',
-    dest: developmentAssets + '/css',
+    src: {
+      scss: srcAssets + '/styles/*.scss',
+      less: srcAssets + '/styles/*.less'
+    },
+    dest:    developmentAssets + '/css',
     options: {
-      sass: {
+      scss: {
         'indentedSyntax': true
       },
+      less: {},
       autoprefixer: {
         browsers: [
           'last 2 versions',
@@ -87,12 +91,18 @@ module.exports = {
     }
   },
 
-  // Lint CSS files
+  // Lint CSS files, but none in /vendor/
   lintStyles: {
-    src: [
-      srcAssets + '/styles/**/*.scss',
-      '!' + srcAssets + '/styles/vendor/**'
-    ],
+    src: {
+      scss: [
+        srcAssets + '/styles/**/*.scss',
+        '!' + srcAssets + '/styles/vendor/**'
+      ],
+      less: [
+        srcAssets + '/styles/**/*.less',
+        '!' + srcAssets + '/styles/vendor/**'
+      ]
+    },
     options: {
       stylelint: {}, // Use .stylelintrc !!
       reporter: {
