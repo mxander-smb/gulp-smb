@@ -14,7 +14,7 @@ var browsersync  = require('browser-sync');
 // PostCSS plugins
 var processors = [
   autoprefixer(config.options.autoprefixer),
-  cssnano
+  cssnano()
 ];
 
 function onError (err) {

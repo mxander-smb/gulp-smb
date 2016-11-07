@@ -16,7 +16,7 @@ var processors = [
 
 // Lint SCSS styles
 // Executed by watch task
-gulp.task('lint-styles', function () {
+gulp.task('lint-styles', function() {
   return gulp.src(config.src.scss)
     .pipe(postcss(processors, {syntax: syntax_scss}));
 });
@@ -28,7 +28,7 @@ gulp.task('lint-styles', function () {
 // Extra task, so that we can easily disable, or switch
 // to another linter for LESS, as stylelint support is
 // experiemental for LESS.
-gulp.task('lint-styles:less', function () {
+gulp.task('lint-styles:less', function() {
   return gulp.src(config.src.less)
     .pipe(postcss(processors, {syntax: syntax_less}));
 });

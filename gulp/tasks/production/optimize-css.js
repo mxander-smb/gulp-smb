@@ -11,7 +11,7 @@ gulp.task('optimize:css', function() {
 
   var processors = [
     uncss(config.options.uncss),
-    cssnano
+    cssnano()
   ];
 
   return gulp.src(config.src)
