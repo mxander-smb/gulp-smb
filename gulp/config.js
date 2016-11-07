@@ -56,12 +56,16 @@ module.exports = {
     svg:     srcAssets + '/images/**/*.svg',
   },
 
-  // Deletes all files from the dev build
+  // Clean build folder
+  //
   // @TODO: Refactor, right now the production task often
   // copies stuff first in dev, an extra task is currently necessary
   // to copy to production folder.
   delete: {
-    src: [developmentAssets]
+    src: [
+      developmentAssets,
+      productionAssets
+    ]
   },
 
   // CSS config

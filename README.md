@@ -4,7 +4,13 @@ Build tooling, work in progress.
 
 ## Install
 
-Make sure Node is installed. Currently tested with Node `v.4.6.0` (LTS).  Use [NVM](https://github.com/creationix/nvm) to manage versions.
+Make sure Node is installed. Currently tested with Node `v.4.6.0` (LTS). Use [NVM](https://github.com/creationix/nvm) to manage versions.
+
+It’s also recommended to install Gulp globally.
+
+```sh
+npm install -g gulp
+```
 
 **Install Dependencies**
 
@@ -30,6 +36,19 @@ gulp production
 
 Also opens a preview of the build with BrowserSync on port `9998`. Exit `ctrl + c` if all is okay, and rsync to server. Won’t be necessary once we’ve it on the Sandbox.
 
+
+### Sandbox Tasks Without BrowserSync
+
+Use the following two tasks when only the asset pipeline is needed *(probably default)*.
+
+```sh
+gulp sandbox
+```
+
+```sh
+gulp sandbox-production
+```
+
 ## Configuration
 
 Use `/gulp/config.js` to adjust project paths and options.
@@ -42,8 +61,6 @@ The run sequence of tasks is defined in the `build.js` task in `production` and 
 
 ## Project Structure and Tasks
 
-@TODO: Docu, add RequireJS notes
-
 **General**
 
 The `gulpfile.js` loads all tasks in `/gulp/tasks/` and its subfolders. `default.js` *(Dev Build)* and `publish.js` *(Production Build)* are the two main tasks, who will run the tasks defined in `production` and `development` respectively.
@@ -52,13 +69,13 @@ The `gulpfile.js` loads all tasks in `/gulp/tasks/` and its subfolders. `default
 
 Right now BrowserSync is used to start a server, which is why `default.js` just triggers the `watch` task, which then starts `browsersync`, which triggers the `build` task.
 
-If BrowserSync isn’t needed, this can be simplified.
+If BrowserSync isn’t needed, use the Sandbox task.
 
 **Production Task**
 
 The `publish.js` task has no Watcher (because production) and triggers the `browsersync:production` task, which then starts `build:production`. BrowserSync is used to provide a final preview.
 
-If BrowserSync isn’t needed, it can be removed.
+If BrowserSync isn’t needed, use the Sandbox task.
 
 ### Task Notes
 
