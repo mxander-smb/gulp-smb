@@ -2,6 +2,7 @@
 
 Build tooling, work in progress.
 
+
 ## Install
 
 Make sure Node is installed. Currently tested with Node `v.4.6.0` (LTS). Use [NVM](https://github.com/creationix/nvm) to manage versions.
@@ -12,101 +13,97 @@ It’s also recommended to install Gulp globally.
 npm install -g gulp
 ```
 
-**Install Dependencies**
+**Install Project Dependencies**
 
 ```sh
 npm install
 ```
 
+
 ## Usage
 
-### Create and Run Dev Build
+### Create Dev Build
 
 ```sh
 gulp
 ```
 
+Creates a dev build and watches asset files for changes.
+
+### Create Production Build
+
+```sh
+gulp publish
+```
+
+Creates a production build.
+
+### Additional: Build Tasks With BrowserSync
+
+If you develop locally, the following two tasks will additionally start a server through BrowserSync:
+
+```sh
+gulp local
+```
+
 BrowserSync will start a server on the configured port, currently `9999`. On file changes BrowserSync will reload all connected browsers.
 
-### Create and Run Production Build
-
 ```sh
-gulp production
+gulp local-production
 ```
 
-Also opens a preview of the build with BrowserSync on port `9998`. Exit `ctrl + c` if all is okay, and rsync to server. Won’t be necessary once we’ve it on the Sandbox.
+Also opens a preview of the build with BrowserSync on port `9998`. Exit `ctrl + c` if all is okay, and rsync to server.
 
-
-### Sandbox Tasks Without BrowserSync
-
-Use the following two tasks when only the asset pipeline is needed *(probably default)*.
-
-```sh
-gulp sandbox
-```
-
-```sh
-gulp sandbox-production
-```
 
 ## Configuration
 
-Use `/gulp/config.js` to adjust project paths and options.
+`/gulp/config.js` is the configuration file that all tasks are using. Everything but the *run sequence* can be adjusted there.
 
-All available tasks are in `/gulp/tasks/`, separated by `production` and `development` (the latter includes additional tasks, and some adjusted for production).
+#### Run Sequence
 
-**Run Sequence**
+The in **Usage** described tasks are the main tasks of gulp-smb, who run a sequence of defined tasks to make a complete build.
 
-The run sequence of tasks is defined in the `build.js` task in `production` and `development`. Tasks in `[]` run parallel.
+The run sequence of those is defined in `/gulp/tasks/development/build.js` and `/gulp/tasks/production/build.js`. Tasks in `[]` run parallel.
+
 
 ## Project Structure and Tasks
 
-**General**
+The `gulpfile.js` makes all tasks in `/gulp/tasks/` and its subfolders with [require-dir](https://www.npmjs.com/package/require-dir) available for Gulp.
 
-The `gulpfile.js` loads all tasks in `/gulp/tasks/` and its subfolders. `default.js` *(Dev Build)* and `publish.js` *(Production Build)* are the two main tasks, who will run the tasks defined in `production` and `development` respectively.
+`default.js` *(Dev Build)* and `publish.js` *(Production Build)* are the two main tasks, who will run the tasks defined in `/gulp/tasks/development/build.js` and `/gulp/tasks/production/build.js`. `local.js` and `local.js` are additional tasks for a local development environment with BrowserSync.
 
-**Dev Task**
+### Task Overview
 
-Right now BrowserSync is used to start a server, which is why `default.js` just triggers the `watch` task, which then starts `browsersync`, which triggers the `build` task.
+> Note: Alphabetical order. Task names are used, but the file names aren’t that much different.
 
-If BrowserSync isn’t needed, use the Sandbox task.
+**Development**
 
-**Production Task**
-
-The `publish.js` task has no Watcher (because production) and triggers the `browsersync:production` task, which then starts `build:production`. BrowserSync is used to provide a final preview.
-
-If BrowserSync isn’t needed, use the Sandbox task.
-
-### Task Notes
-
-> Note: The file name reflects the task name, with a few exceptions. Dashes in file names are replaced with `:` when it made sense. Personal preference, adjust as you like. Below the task name is used, as some files have multiple tasks.
-
-Alphabetical order.
-
-**Dev**
-
-- `browsersync`: Run build task and start a server with BrowserSync.
+- `browsersync`: Run build task and start a server with BrowserSync. Only used for `gulp local`.
 - `browsersync:reload`: Do a BrowserSync reload.
 - `build`: Run all tasks needed for a build, in defined order.
 - TMP (we probably don’t need this) `copy:html`: Copy HTML files.
-- `delete`: Clean the build folder before a new build.
+- `delete`: Clean the asset build folder before a new build.
 - `images`: Copy images to build folder.
 - `lint-js`: Lint JavaScript files.
 - `lint-styles`: Lint SCSS styles.
-- `lint-styles:less`: Lint LESS styles.
-- `rebuild`: Rebuild and trigger `browsersync:reload`.
-- `scripts`: Create RequireJS modules, with Source Maps.
-- TMP (we probably don’t need this) `scripts:shell`: Execute r.js directly via gulp-shell.
+- `lint-styles:less`: Lint LESS styles. Extra task, so that we can easily disable, or switch to another linter for LESS, as stylelint support is experiemental for LESS.
+- `rebuild`: Rebuild, when HTML files are changed.
+- `rebuild:browsersync`: Rebuild and trigger `browsersync:reload`. Only used for `gulp local`.
+- `scripts:base`: WIP! Should use r.js or gulp-requirejs-optimize to create base.js RequireJS bundle with the `/js/require-config.js` and `/js/base-config.js` config files.
+- `scripts:require-config`: Create RequireJS `config.js`.
+- `scripts:sti`: WIP! Should pipe `/js/sti/*/` files and use r.js with the `/js/require-config.js` and `/js/module-config.js` config files and the extending arguments, defined somewhere in config.js or the module provides a config file.
+- `scripts:vendor`: Copy vendor JS and create AMD modules for in config.js defined files.
 - `sprites`: Create SVG sprites.
 - `styles`: Compile SCSS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) (with source map generation).
 - `styles:less`: Compile LESS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) (with source map generation).
-- `watch`: Start BrowserSync task, watch files for changes, and run defined task(s) on file change.
+- `watch`: Watch files for changes, and run defined task(s) on file change.
+- `watch:browsersync`: Start BrowserSync task, watch files for changes, and run defined task(s) on file change. Only used for `gulp local`.
 
 **Production**
 
-Reminder: Production uses also some tasks from Dev, this is for example why there is a `copy:css` task, as CSS is copied from `/build/development/` to `/build/production/`.
+> Reminder: Production uses also some tasks from Dev. This is for example why there is a `copy:css` task, as the Dev task saves the outcome to  `/build/development/`, so we still need to copy it to production.
 
-- `browsersync:production`: Run production build task and start a server with BrowserSync.
+- `browsersync:production`: Run production build task and start a server with BrowserSync. Only used for `gulp local-production`.
 - `build:production`: Run all tasks needed for a build, in defined order.
 - `copy:css`: Copy CSS files to production build.
 - `gzip`: Gzip files.
@@ -118,6 +115,7 @@ Reminder: Production uses also some tasks from Dev, this is for example why ther
 - `revision`: Revision all asset files and write a manifest file.
 - `styles`: Compile SCSS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) **(without source map generation)**.
 - `styles:less`: Compile LESS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) **(without source map generation)**.
+
 
 ## Resources
 

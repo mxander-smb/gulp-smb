@@ -1,9 +1,15 @@
-// Bootstrap
+@charset "utf-8";
+
+/* Configuration and helpers */
+
+/* Third-party */
 @import "vendor/bootstrap/bootstrap.scss";
 
-//
-// SMB styles
-//
+/* Base */
+@import "base/base";
+@import "base/typography";
 
-// Components
+/* Layout sections */
+
+/* Components */
 @import "components/card";

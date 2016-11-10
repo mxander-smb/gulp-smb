@@ -64,7 +64,7 @@ module.exports = {
     svg:     srcAssets + imgFolder + '/**/*.svg'
   },
 
-  // Clean build folder
+  // Clean build folder by deleting asset files
   //
   // @TODO: Refactor, right now the production task often
   // copies stuff first in dev, an extra task is currently necessary

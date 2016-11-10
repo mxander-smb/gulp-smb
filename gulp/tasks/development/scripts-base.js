@@ -1,5 +1,9 @@
-// @TODO: This task probably needs to be optimized by
-// someone who’s knee-deep into RequireJS :)
+// Work in Progress
+//
+// This should use r.js or gulp-requirejs-optimize
+// to create base.js RequireJS bundle with the
+// /js/require-config.js && /js/base-config.js config
+// files. Destination: build-path + /js/build/base.js.
 
 var config     = require('../../config').scripts;
 
