@@ -6,9 +6,17 @@ gulp.task('build', function(callback) {
   runSequence('delete',
   [
     'copy:html',
+
+    // CSS tasks
     'styles',
     'styles:less',
-    'scripts',
+
+    // JavaScript tasks
+    //'scripts:sti',
+    //'scripts:base',
+    'scripts:vendor',
+    'scripts:require-config',
+
     'sprites',
     'images'
   ],

@@ -10,7 +10,12 @@ gulp.task('build:production', function(callback) {
     'styles:production',
     'styles:less:production',
 
-    'scripts',
+    // JavaScript tasks
+    //'scripts:sti',
+    //'scripts:base',
+    'scripts:vendor',
+    'scripts:require-config',
+
     'images'
   ],
   [
@@ -29,7 +34,7 @@ gulp.task('build:production', function(callback) {
   // is active! Disable to get the full CSS from the styles
   // task, or define in config.js which html files should be
   // used to lookup usage.
-  'optimize:css',
+  //'optimize:css',
 
   // Revision asset files and update their references
   'revision',

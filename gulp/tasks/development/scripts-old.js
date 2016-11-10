@@ -1,5 +1,4 @@
-// @TODO: This task probably needs to be optimized by
-// someone who’s knee-deep into RequireJS :)
+// Not used right now!
 
 var config     = require('../../config').scripts;
 
@@ -11,7 +10,7 @@ var sourcemaps = require('gulp-sourcemaps');
 
 // Create RequireJS modules,
 // with sourcemaps.
-gulp.task('scripts', function() {
+gulp.task('scripts:old', function() {
   return gulp.src(config.src)
     .pipe(sourcemaps.init())
     .pipe(requirejs({

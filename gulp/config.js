@@ -112,8 +112,39 @@ module.exports = {
     }
   },
 
-  // RequireJS
+  // JavaScript config
   scripts: {
+    // Among others used to copy JS files to the
+    // build folder. Vendor files are ignored, as they
+    // are handled through scripts.vendor. Files ending
+    // with -config.js in the JS folder are also ignored,
+    // as they are RequireJS config files.
+    src: [
+      srcAssets + '/javascripts/**/*.js',
+      '!' + srcAssets + '/javascripts/*-config.js',
+      '!' + srcAssets + '/javascripts/vendor/'
+    ],
+    dest: developmentAssets + '/js',
+
+    // RequireJS
+    requireJs: {
+      srcConfig: srcAssets + '/javascripts/require-config.js',
+      rename: { basename: 'config' } // Rename require-config.js to config.js
+    },
+
+    // Vendor scripts
+    vendor: {
+      src:  srcAssets + '/javascripts/vendor/**/*.js',
+      dest: developmentAssets + '/js/vendor',
+      convertToAMD: [
+        srcAssets + '/javascripts/vendor/jquery.cookie-0.9/*.js'
+        // Add files
+      ]
+    }
+  },
+
+  // Old JavaScript config (can be deleted if no longer needed)
+  scriptsOld: {
     src: [
       srcAssets + '/javascripts/*.js',
       '!' + srcAssets + '/javascripts/requirejs-config.js',
@@ -131,7 +162,11 @@ module.exports = {
 
   // Lint JavaScript files
   LintJs: {
-    src: srcAssets + '/javascripts/*.js'
+    src: [
+      srcAssets + '/javascripts/**/*.js',
+      '!' + srcAssets + '/javascripts/*-config.js',
+      '!' + srcAssets + '/javascripts/vendor/'
+    ]
   },
 
   // Icon sprites
@@ -145,8 +180,12 @@ module.exports = {
   // Copy HTML files
   // @TODO: We probably don’t need that if we use
   // Gulp only as an asset pipeline.
+  //
+  // Currently only html files on the root level are
+  // copied, as otherwise also files from js/sti would
+  // be copied.
   copyhtml: {
-    src:  src + '/**/*.html',
+    src: src + '/*.html',
     dest: development
   },
 
@@ -180,8 +219,12 @@ module.exports = {
         }
       }
     },
+    // @TODO: Currently all JavaScript files are optimized
+    // incl. vendor scripts, which could break stuff.
+    // Adjust if though, and create an extra task to copy
+    // JS files to production.
     js: {
-      src:  developmentAssets + '/js/*.js',
+      src:  developmentAssets + '/js/**/*.js',
       dest: productionAssets + '/js/',
       options: {}
     },
