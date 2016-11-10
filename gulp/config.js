@@ -8,6 +8,7 @@ var build = 'build';
 var development = build + '/development';
 var production  = build + '/production';
 
+
 // Asset paths
 //
 // Note: This depends on the project setup, and could
@@ -15,8 +16,16 @@ var production  = build + '/production';
 // folder. Right now BrowserSync only watches the
 // asset files.
 var srcAssets         = src + '/_assets';
+
+// Folder names for assets
+var cssFolder         = '/styles';
+var jsFolder          = '/js';
+var imgFolder         = '/img';
+
+// Asset build paths
 var developmentAssets = build + '/development/assets'; // Dev build
 var productionAssets  = build + '/production/assets';  // Production build
+
 
 module.exports = {
 
@@ -30,10 +39,9 @@ module.exports = {
       // Watched files in the dev build. BS reloads
       // website on change.
       files: [
-        developmentAssets + '/css/*.css',
-        developmentAssets + '/js/*.js',
-        developmentAssets + '/images/**',
-        developmentAssets + '/fonts/*'
+        developmentAssets + cssFolder + '/*.css',
+        developmentAssets + jsFolder + '/*.js',
+        developmentAssets + imgFolder + '/**'
       ],
       notify: false
     },
@@ -49,11 +57,11 @@ module.exports = {
   // Watch source files
   watch: {
     html:    src + '/**/*.html',
-    scss:    srcAssets + '/styles/**/*.scss',
-    less:    srcAssets + '/styles/**/*.less',
-    scripts: srcAssets + '/javascripts/**/*.js',
-    images:  srcAssets + '/images/**/*',
-    svg:     srcAssets + '/images/**/*.svg',
+    scss:    srcAssets + cssFolder + '/**/*.scss',
+    less:    srcAssets + cssFolder + '/**/*.less',
+    scripts: srcAssets + jsFolder + '/**/*.js',
+    images:  srcAssets + imgFolder + '/**/*',
+    svg:     srcAssets + imgFolder + '/**/*.svg'
   },
 
   // Clean build folder
@@ -71,10 +79,10 @@ module.exports = {
   // CSS config
   styles: {
     src: {
-      scss: srcAssets + '/styles/*.scss',
-      less: srcAssets + '/styles/*.less'
+      scss: srcAssets + cssFolder + '/*.scss',
+      less: srcAssets + cssFolder + '/*.less'
     },
-    dest:    developmentAssets + '/css',
+    dest: developmentAssets + cssFolder,
     options: {
       scss: {
         'indentedSyntax': true
@@ -96,12 +104,12 @@ module.exports = {
   lintStyles: {
     src: {
       scss: [
-        srcAssets + '/styles/**/*.scss',
-        '!' + srcAssets + '/styles/vendor/**'
+        srcAssets + cssFolder + '/**/*.scss',
+        '!' + srcAssets + cssFolder + '/vendor/**'
       ],
       less: [
-        srcAssets + '/styles/**/*.less',
-        '!' + srcAssets + '/styles/vendor/**'
+        srcAssets + cssFolder + '/**/*.less',
+        '!' + srcAssets + cssFolder + '/vendor/**'
       ]
     },
     options: {
@@ -120,24 +128,24 @@ module.exports = {
     // with -config.js in the JS folder are also ignored,
     // as they are RequireJS config files.
     src: [
-      srcAssets + '/javascripts/**/*.js',
-      '!' + srcAssets + '/javascripts/*-config.js',
-      '!' + srcAssets + '/javascripts/vendor/'
+      srcAssets + jsFolder + '/**/*.js',
+      '!' + srcAssets + jsFolder + '/*-config.js',
+      '!' + srcAssets + jsFolder + '/vendor/'
     ],
-    dest: developmentAssets + '/js',
+    dest: developmentAssets + jsFolder,
 
     // RequireJS
     requireJs: {
-      srcConfig: srcAssets + '/javascripts/require-config.js',
+      srcConfig: srcAssets + jsFolder + '/require-config.js',
       rename: { basename: 'config' } // Rename require-config.js to config.js
     },
 
     // Vendor scripts
     vendor: {
-      src:  srcAssets + '/javascripts/vendor/**/*.js',
-      dest: developmentAssets + '/js/vendor',
+      src:  srcAssets + jsFolder + '/vendor/**/*.js',
+      dest: developmentAssets + jsFolder + '/vendor',
       convertToAMD: [
-        srcAssets + '/javascripts/vendor/jquery.cookie-0.9/*.js'
+        srcAssets + jsFolder + '/vendor/jquery.cookie-0.9/*.js'
         // Add files
       ]
     }
@@ -146,26 +154,26 @@ module.exports = {
   // Old JavaScript config (can be deleted if no longer needed)
   scriptsOld: {
     src: [
-      srcAssets + '/javascripts/*.js',
-      '!' + srcAssets + '/javascripts/requirejs-config.js',
+      srcAssets + jsFolder + '/*.js',
+      '!' + srcAssets + jsFolder + '/requirejs-config.js',
       // Ignore shell example
-      '!' + srcAssets + '/javascripts/shell-rjs-example.js'
+      '!' + srcAssets + jsFolder + '/shell-rjs-example.js'
 
       // Use this config to demo the scripts:shell task, which
       // uses r.js instead of a wrapper.
-      //srcAssets + '/javascripts/shell-rjs-example.js',
-      //'!' + srcAssets + '/javascripts/requirejs-config.js'
+      //srcAssets + jsFolder + '/shell-rjs-example.js',
+      //'!' + srcAssets + jsFolder + '/requirejs-config.js'
     ],
-    dest: developmentAssets + '/js',
+    dest: developmentAssets + jsFolder,
     options: {}
   },
 
   // Lint JavaScript files
   LintJs: {
     src: [
-      srcAssets + '/javascripts/**/*.js',
-      '!' + srcAssets + '/javascripts/*-config.js',
-      '!' + srcAssets + '/javascripts/vendor/'
+      srcAssets + jsFolder + '/**/*.js',
+      '!' + srcAssets + jsFolder + '/*-config.js',
+      '!' + srcAssets + jsFolder + '/vendor/'
     ]
   },
 
@@ -173,8 +181,8 @@ module.exports = {
   // @TODO: Not ideal if a mixed set of icon formats is used,
   // add gulp-svgfallback, or put sprites in a sprites folder.
   sprites: {
-    src:  srcAssets + '/images/icons/**/*',
-    dest: developmentAssets + '/images/icons'
+    src:  srcAssets + imgFolder + '/icons/**/*',
+    dest: developmentAssets + imgFolder + '/icons'
   },
 
   // Copy HTML files
@@ -193,23 +201,23 @@ module.exports = {
   // Icons are copied by the sprites task.
   images: {
     src: [
-      srcAssets + '/images/**/*',
-      '!' + srcAssets + '/images/icons/*'
+      srcAssets + imgFolder + '/**/*',
+      '!' + srcAssets + imgFolder + '/icons/*'
     ],
-    dest: developmentAssets + '/images'
+    dest: developmentAssets + imgFolder
   },
 
   // Copy production ready styles
   copycss: {
-    src:  developmentAssets + '/css/*.css',
-    dest: productionAssets + '/css/'
+    src:  developmentAssets + cssFolder + '/*.css',
+    dest: productionAssets + cssFolder
   },
 
   // Optimize CSS, JS, Images, HTML for production
   optimize: {
     css: {
-      src:  productionAssets + '/css/*.css',
-      dest: productionAssets + '/css/',
+      src:  productionAssets + cssFolder + '/*.css',
+      dest: productionAssets + cssFolder,
       options: {
         uncss: {
           html: [
@@ -224,13 +232,13 @@ module.exports = {
     // Adjust if though, and create an extra task to copy
     // JS files to production.
     js: {
-      src:  developmentAssets + '/js/**/*.js',
-      dest: productionAssets + '/js/',
+      src:  developmentAssets + jsFolder + '/**/*.js',
+      dest: productionAssets + jsFolder,
       options: {}
     },
     images: {
-      src:  developmentAssets + '/images/**/*.{jpg,jpeg,png,gif,svg}',
-      dest: productionAssets + '/images/',
+      src:  developmentAssets + imgFolder + '/**/*.{jpg,jpeg,png,gif,svg}',
+      dest: productionAssets + imgFolder,
       // @TODO Options needs to be adjusted on update to imagemin@3.x.x
       options: {
         optimizationLevel: 3,
@@ -261,8 +269,8 @@ module.exports = {
   revision: {
     src: {
       assets: [
-        productionAssets + '/css/*.css',
-        productionAssets + '/js/*.js'
+        productionAssets + cssFolder + '/*.css',
+        productionAssets + jsFolder + '/*.js'
       ],
       base: production
     },
