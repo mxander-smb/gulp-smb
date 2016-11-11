@@ -3,7 +3,6 @@
     optimize: 'none',
     enforceDefine: false,
     findNestedDependencies: false,
-    useStrict: true,
 
     paths: {
         'jquery': 'vendor/jquery-1.11.1/jquery',
