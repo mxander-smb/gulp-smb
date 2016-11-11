@@ -9,7 +9,7 @@ gulp.task('watch', ['build'], function() {
   gulp.watch(config.html, ['rebuild']);
   gulp.watch(config.scss, ['styles', 'lint-styles']);
   gulp.watch(config.less, ['styles:less', 'lint-styles:less']);
-  gulp.watch(config.scripts, ['scripts', 'lint-js']);
+  gulp.watch(config.scripts, ['scripts:modules', 'scripts:base', 'lint-js']);
   gulp.watch(config.images, ['images']);
 });
 
@@ -21,6 +21,6 @@ gulp.task('watch:browsersync', ['browsersync'], function() {
   gulp.watch(config.html, ['rebuild:browsersync']);
   gulp.watch(config.scss, ['styles', 'lint-styles']);
   gulp.watch(config.less, ['styles:less', 'lint-styles:less']);
-  gulp.watch(config.scripts, ['scripts', 'lint-js']);
+  gulp.watch(config.scripts, ['scripts:modules', 'scripts:base', 'lint-js']);
   gulp.watch(config.images, ['images']);
 });

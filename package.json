@@ -1,6 +1,6 @@
 {
   "name": "gulp-smb",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Build tooling for SMB",
   "devDependencies": {
     "autoprefixer": "^6.5.1",
@@ -18,7 +18,6 @@
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-requirejs-optimize": "^1.2.0",
     "gulp-rev": "^7.1.2",
     "gulp-rev-collector": "^1.0.5",
     "gulp-sass": "^2.3.2",

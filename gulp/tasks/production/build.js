@@ -11,8 +11,8 @@ gulp.task('build:production', function(callback) {
     'styles:less:production',
 
     // JavaScript tasks
-    //'scripts:sti',
-    //'scripts:base',
+    'scripts:modules',
+    'scripts:base',
     'scripts:vendor',
     'scripts:require-config',
 

@@ -6,7 +6,7 @@ var rename = require('gulp-rename');
 
 // Create RequireJS config.js
 gulp.task('scripts:require-config', function() {
-  return gulp.src(config.requireJs.srcConfig)
+  return gulp.src(config.requireJs.src)
     .pipe(wrap('require.config<%= contents %>;'))
     .pipe(rename(config.requireJs.rename))
     .pipe(gulp.dest(config.dest));

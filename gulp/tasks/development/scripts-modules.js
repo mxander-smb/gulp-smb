@@ -11,7 +11,7 @@ var config = require('../../config').scripts;
 var gulp   = require('gulp');
 
 
-gulp.task('scripts:sti', function() {
+gulp.task('scripts:modules', function() {
   return gulp.src(config.src)
     .pipe(gulp.dest(config.dest));
 });
