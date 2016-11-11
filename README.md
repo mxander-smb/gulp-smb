@@ -76,45 +76,49 @@ The `gulpfile.js` makes all tasks in `/gulp/tasks/` and its subfolders with [req
 
 > Note: Alphabetical order. Task names are used, but the file names aren’t that much different.
 
-**Development**
+#### Development Folder
 
-- `browsersync`: Run build task and start a server with BrowserSync. Only used for `gulp local`.
-- `browsersync:reload`: Do a BrowserSync reload.
-- `build`: Run all tasks needed for a build, in defined order.
-- TMP (we probably don’t need this) `copy:html`: Copy HTML files.
-- `delete`: Clean the asset build folder before a new build.
-- `images`: Copy images to build folder.
-- `lint-js`: Lint JavaScript files.
-- `lint-styles`: Lint SCSS styles.
-- `lint-styles:less`: Lint LESS styles. Extra task, so that we can easily disable, or switch to another linter for LESS, as stylelint support is experiemental for LESS.
-- `rebuild`: Rebuild, when HTML files are changed.
-- `rebuild:browsersync`: Rebuild and trigger `browsersync:reload`. Only used for `gulp local`.
-- `scripts:base`: WIP! Should use r.js or gulp-requirejs-optimize to create base.js RequireJS bundle with the `/js/require-config.js` and `/js/base-config.js` config files.
-- `scripts:require-config`: Create RequireJS `config.js`.
-- `scripts:sti`: WIP! Should pipe `/js/sti/*/` files and use r.js with the `/js/require-config.js` and `/js/module-config.js` config files and the extending arguments, defined somewhere in config.js or the module provides a config file.
-- `scripts:vendor`: Copy vendor JS and create AMD modules for in config.js defined files.
-- `sprites`: Create SVG sprites.
-- `styles`: Compile SCSS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) (with source map generation).
-- `styles:less`: Compile LESS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) (with source map generation).
-- `watch`: Watch files for changes, and run defined task(s) on file change.
-- `watch:browsersync`: Start BrowserSync task, watch files for changes, and run defined task(s) on file change. Only used for `gulp local`.
+| Task | Description |
+|:-----|:------------|
+| `browsersync` | Run build task and start a server with BrowserSync. Only used for `gulp local`.
+| `browsersync:reload` | Do a BrowserSync reload.
+| `build` | Run all tasks needed for a build, in defined order.
+| `copy:html` | Copy HTML files. *(TEMPORARY, we probably don’t need this)*
+| `delete` | Clean the asset build folder before a new build.
+| `images` | Copy images to build folder.
+| `lint-js` | Lint JavaScript files.
+| `lint-styles` | Lint SCSS styles.
+| `lint-styles:less` | Lint LESS styles. Extra task, so that we can easily disable, or switch to another linter for LESS, as stylelint support is experimental for LESS.
+| `rebuild` | Rebuild, when HTML files are changed.
+| `rebuild:browsersync` | Rebuild and trigger `browsersync:reload`. Only used for `gulp local`.
+| `scripts:base` | Create base.js bundle with r.js and `/js/build-base-config.js`.
+| `scripts:modules` | WIP! Should pipe `/js/sti/*/` files and use r.js with the `/js/require-config.js` and `/js/build-module-config.js` config files and the extending arguments, defined somewhere in config.js or the module provides a config file.
+| `scripts:require-config` | Create RequireJS `config.js`.
+| `scripts:vendor` | Copy vendor JS and create AMD modules for in config.js defined files.
+| `sprites` | Create SVG sprites.
+| `styles` | Compile SCSS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) (with source map generation).
+| `styles:less` | Compile LESS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) (with source map generation).
+| `watch` | Watch files for changes, and run defined task(s) on file change.
+| `watch:browsersync` | Start BrowserSync task, watch files for changes, and run defined task(s) on file change. Only used for `gulp local`.
 
-**Production**
+#### Production Folder
 
 > Reminder: Production uses also some tasks from Dev. This is for example why there is a `copy:css` task, as the Dev task saves the outcome to  `/build/development/`, so we still need to copy it to production.
 
-- `browsersync:production`: Run production build task and start a server with BrowserSync. Only used for `gulp local-production`.
-- `build:production`: Run all tasks needed for a build, in defined order.
-- `copy:css`: Copy CSS files to production build.
-- `gzip`: Gzip files.
-- `optimize:css`: Optimize CSS files with UnCSS (cssnano, afterwards).
-- `optimize:html`: Copy and minimize HTML.
-- `optimize:images`: Copy and minimize images, incl. sprites.
-- `optimize:js`: Copy and minimize JS files with UglifyJS.
-- `rev-update-references`: Replace all links to asset files via a manifest file.
-- `revision`: Revision all asset files and write a manifest file.
-- `styles`: Compile SCSS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) **(without source map generation)**.
-- `styles:less`: Compile LESS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) **(without source map generation)**.
+| Task | Description |
+|:-----|:------------|
+| `browsersync:production` | Run production build task and start a server with BrowserSync. Only used for `gulp local-production`.
+| `build:production` | Run all tasks needed for a build, in defined order.
+| `copy:css` | Copy CSS files to production build.
+| `gzip` | Gzip files.
+| `optimize:css` | Optimize CSS files with UnCSS (cssnano, afterwards).
+| `optimize:html` | Copy and minimize HTML.
+| `optimize:images` | Copy and minimize images, incl. sprites.
+| `optimize:js` | Copy and minimize JS files with UglifyJS.
+| `rev-update-references` | Replace all links to asset files via a manifest file.
+| `revision` | Revision all asset files and write a manifest file.
+| `styles` | Compile SCSS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) **(without source map generation)**.
+| `styles:less` | Compile LESS, and then run through PostCSS and it’s plugins (currently Autoprefixer and cssnano) **(without source map generation)**.
 
 
 ## Resources
