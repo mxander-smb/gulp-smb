@@ -20,10 +20,10 @@ gulp.task('build:production', function(callback) {
   ],
   [
     'copy:css',
+    'copy:html:production',
 
     // Optional
     'optimize:js',
-    'optimize:html',
     'optimize:images'
   ],
 

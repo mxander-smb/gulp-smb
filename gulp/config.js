@@ -198,8 +198,14 @@ module.exports = {
   // copied, as otherwise also files from js/sti would
   // be copied.
   copyhtml: {
-    src: src + '/*.html',
-    dest: development
+    development: {
+      src: src + '/*.html',
+      dest: development
+    },
+    production: {
+      src: src + '/*.html',
+      dest: production
+    }
   },
 
 
@@ -257,19 +263,6 @@ module.exports = {
         svgoPlugins: [{
           removeDesc: true
         }]
-      }
-    },
-    html: {
-      src:  src + '/**/*.html',
-      dest: production,
-      options: {
-        removeComments: true,
-        removeCommentsFromCDATA: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        minifyJS: true,
-        minifyCSS: true,
-        processScripts: ['application/ld+json']
       }
     }
   },

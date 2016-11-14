@@ -110,9 +110,9 @@ The `gulpfile.js` makes all tasks in `/gulp/tasks/` and its subfolders with [req
 | `browsersync:production` | Run production build task and start a server with BrowserSync. Only used for `gulp local-production`.
 | `build:production` | Run all tasks needed for a build, in defined order.
 | `copy:css` | Copy CSS files to production build.
+| `copy:html` | Copy HTML files to production build.
 | `gzip` | Gzip files.
 | `optimize:css` | Optimize CSS files with UnCSS (cssnano, afterwards).
-| `optimize:html` | Copy and minimize HTML.
 | `optimize:images` | Copy and minimize images, incl. sprites.
 | `optimize:js` | Copy and minimize JS files with UglifyJS.
 | `rev-update-references` | Replace all links to asset files via a manifest file.
