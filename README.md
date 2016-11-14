@@ -7,6 +7,16 @@ Build tooling, work in progress.
 
 Make sure Node is installed. Currently tested with Node `v.4.6.0` (LTS). Use [NVM](https://github.com/creationix/nvm) to manage versions.
 
+**Install r.js**
+
+So that `/gulp/tasks/development/scripts-base.js` can execute the `r.js` command. As an alternative you could include `r.js` in your project and adjust the task to use it.
+
+```sh
+npm install -g requirejs
+```
+
+**Install Gulp**
+
 It’s also recommended to install Gulp globally.
 
 ```sh
